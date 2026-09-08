@@ -3,12 +3,25 @@
 import asyncio
 import os
 
-from browser_use import Agent, BrowserProfile, ChatOpenAI
+from browser_use import Agent, BrowserProfile
+from browser_use.llm import BaseChatModel, ChatBrowserUse, ChatOpenAI
 
 TASK = (
     "stat.uz saytiga kir, oxirgi inflyatsiya bo'yicha yangilikni top "
     "va sarlavhasini qaytar"
 )
+
+
+def build_llm() -> BaseChatModel:
+    """Mavjud kalitga qarab LLM tanlaydi."""
+    if os.getenv("BROWSER_USE_API_KEY"):
+        return ChatBrowserUse(model=os.getenv("BROWSER_USE_MODEL", "bu-2-0"))
+    if os.getenv("OPENAI_API_KEY"):
+        return ChatOpenAI(model=os.getenv("OPENAI_MODEL", "gpt-4o"))
+    raise SystemExit(
+        "Kalit topilmadi. .env faylga BROWSER_USE_API_KEY yoki "
+        "OPENAI_API_KEY qo'shing."
+    )
 
 
 def build_profile() -> BrowserProfile:
@@ -26,14 +39,7 @@ def build_profile() -> BrowserProfile:
 
 
 async def main() -> None:
-    if not os.getenv("OPENAI_API_KEY"):
-        raise SystemExit("OPENAI_API_KEY o'rnatilmagan. .env faylga qo'shing.")
-
-    agent = Agent(
-        task=TASK,
-        llm=ChatOpenAI(model="gpt-4o"),
-        browser_profile=build_profile(),
-    )
+    agent = Agent(task=TASK, llm=build_llm(), browser_profile=build_profile())
     history = await agent.run(max_steps=15)
 
     result = history.final_result()

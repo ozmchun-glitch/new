@@ -21,7 +21,8 @@ Yoki tizimda mavjud brauzerni ko'rsating: `CHROME_PATH=/usr/bin/chromium`.
 
 ## Sozlash
 
-`.env.example` nusxasini `.env` qilib oling va OpenAI kalitini kiriting:
+`.env.example` nusxasini `.env` qilib oling va kalitni kiriting. `BROWSER_USE_API_KEY`
+berilsa Browser Use Cloud modeli, aks holda `OPENAI_API_KEY` bilan OpenAI ishlatiladi:
 
 ```bash
 cp .env.example .env
@@ -30,7 +31,7 @@ cp .env.example .env
 ## Ishga tushirish
 
 ```bash
-export OPENAI_API_KEY=sk-...
+export BROWSER_USE_API_KEY=bu_...   # yoki OPENAI_API_KEY=sk-...
 python main.py
 ```
 
@@ -41,7 +42,7 @@ Brauzerni ko'rinadigan rejimda kuzatish uchun: `HEADLESS=false python main.py`.
 Skript ishlashi uchun tarmoqdan quyidagilarga kirish ochiq bo'lishi kerak:
 
 - `stat.uz` — agent ochadigan sayt
-- `api.openai.com` — LLM chaqiruvlari
+- `llm.api.browser-use.com` yoki `api.openai.com` — LLM chaqiruvlari
 
 Cheklangan (egress-filtrlangan) muhitlarda bu hostlar bloklansa, agent
 navigatsiyada `site unavailable` xatosi bilan to'xtaydi.
