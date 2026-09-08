@@ -1,6 +1,6 @@
-# stat.uz inflyatsiya yangiligi agenti
+# cbu.uz inflyatsiya yangiligi agenti
 
-[browser-use](https://github.com/browser-use/browser-use) yordamida `stat.uz`
+[browser-use](https://github.com/browser-use/browser-use) yordamida `cbu.uz`
 saytidan oxirgi inflyatsiya bo'yicha yangilikning sarlavhasini topadi.
 
 ## O'rnatish
@@ -41,7 +41,7 @@ Brauzerni ko'rinadigan rejimda kuzatish uchun: `HEADLESS=false python main.py`.
 
 Skript ishlashi uchun tarmoqdan quyidagilarga kirish ochiq bo'lishi kerak:
 
-- `stat.uz` — agent ochadigan sayt
+- `cbu.uz` — agent ochadigan sayt (`TARGET_SITE` bilan almashtiriladi)
 - `llm.api.browser-use.com` yoki `api.openai.com` — LLM chaqiruvlari
 
 Cheklangan (egress-filtrlangan) muhitlarda bu hostlar bloklansa, agent

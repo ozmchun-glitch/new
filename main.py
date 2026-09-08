@@ -1,4 +1,4 @@
-"""stat.uz saytidan oxirgi inflyatsiya yangiligining sarlavhasini topadi."""
+"""cbu.uz saytidan oxirgi inflyatsiya yangiligining sarlavhasini topadi."""
 
 import asyncio
 import os
@@ -6,8 +6,10 @@ import os
 from browser_use import Agent, BrowserProfile
 from browser_use.llm import BaseChatModel, ChatBrowserUse, ChatOpenAI
 
+SITE = os.getenv("TARGET_SITE", "cbu.uz")
+
 TASK = (
-    "stat.uz saytiga kir, oxirgi inflyatsiya bo'yicha yangilikni top "
+    f"{SITE} saytiga kir, oxirgi inflyatsiya bo'yicha yangilikni top "
     "va sarlavhasini qaytar"
 )
 
